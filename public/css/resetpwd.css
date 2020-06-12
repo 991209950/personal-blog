@@ -1,0 +1,58 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    width: 1030px;
+    margin: 0 auto;
+}
+
+.subnav_process {
+    width: 1000px;
+}
+
+.section-main_fillUname,
+.section-main_problem,
+.section-main_newPassword,
+.section-main_complete {
+    position: relative;
+    width: 360px;
+    margin: 0 auto;
+}
+
+.section-main_fillUname span {
+    display: block;
+    font-size: 16px;
+    text-align: left;
+}
+
+.errMessage {
+    position: absolute;
+    right: -280px;
+    width: 264px;
+    height: 46px;
+    font-size: 13px;
+    line-height: 40px;
+    text-align: left;
+    padding: 0 10px;
+    background-color: #ffefef;
+    border: 1px solid #ffbbba;
+    color: #ff0a0a;
+}
+
+.errTel {
+    top: 40px;
+}
+
+.errAnswer {
+    top: 95px;
+}
+
+.errNewPwd1 {
+    top: 25px;
+}
+
+.errNewPwd2 {
+    top: 110px;
+}

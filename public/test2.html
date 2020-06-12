@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="app"></div>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script>
+        $.post('/login', {username: '1234567', password: '987654'}, function(data) {
+            console.log(data);
+            $('.app').html(data);
+        })
+    </script>
+</body>
+</html>

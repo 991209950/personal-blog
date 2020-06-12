@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        i {
+            color: aqua;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" id="inp"><button id="btn">搜索</button>
+    <div id="app">
+        abcdefghigklmnopqrstuvwxyz
+    </div>
+    <script>
+        var btn = document.getElementById('btn');
+        var div = document.getElementById('app');
+        btn.addEventListener('click', function () {
+            var v = document.getElementById('inp').value;
+            var reg = new RegExp(v);
+            div.innerHTML = div.innerText.replace(reg, '<i>' + v + '</i>');
+        }, false);
+
+    </script>
+</body>
+
+</html>

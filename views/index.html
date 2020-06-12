@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>我的空间</title>
+    <link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+    <div class="cont clearfix" id="cont">
+        <!-- 导航开始 -->
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">GG空间</a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="index.html">个人主页</a></li>
+                        <li><a href="javascript:;">好友动态</a></li>
+                    </ul>
+                    <form class="navbar-form navbar-left">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="搜索动态">
+                        </div>
+                        <button type="submit" class="btn btn-default">搜索</button>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="./news.html">消息 <span class="badge" v-if="newsNumber">{{newsNumber}}</span></a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-haspopup="true" aria-expanded="false" v-text="user"><span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">好友列表</a></li>
+                                <li><a href="./user-alter.html">个人信息设置</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="./login.html">退出登录</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- 导航结束 -->
+        <!-- 好友列表展示开始 -->
+        <div class="friendList col-sm-3 hidden-xs">
+            <div class="header">
+                <div class="page-header">
+                    <h5>好友列表</h5>
+                    <span @click="isAddFriend=false" class="glyphicon glyphicon-plus addFriend"></span>
+                </div>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td class="hidden-sm">昵称</td>
+                        <td>备注</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 好友列表 -->
+                    <tr :key="item._id" v-for="item in friendList['friends']" v-cloak>
+                        <td class="hidden-sm">{{item.id.nickname}}</td>
+                        <td :title="item.nickname">{{item.name}}</td>
+                    </tr>
+                    <!-- 好友列表结束 -->
+                </tbody>
+            </table>
+            <ul class="pagination pagination-sm">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <!-- 分页 -->
+                <li v-for="item in friendList.pages" :class="item === friendList.page ? 'active' : ''" v-cloak><a
+                        href="#">{{item}}</a></li>
+                <li>
+                    <!-- 分页结束 -->
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- 好友列表展示结束 -->
+        <!-- 主体部分开始 -->
+        <div class="subject col-sm-7 col-sm-offset-1 col-xs-offset-1 col-xs-10">
+            <!-- 动态发表开始 -->
+            <div class="poster-inner">
+                <div class="">
+                    <div class="input-group">
+                        <textarea v-model="content" class="form-control" placeholder="说点什么吧" cols="30"
+                            rows="3"></textarea>
+                        <span class="input-group-btn">
+                            <input id="myFile" @change="complete" class="hidden" type="file"
+                                accept="image/gif,image/jpeg,image/jpg,image/png">
+                            <label style="border-radius: 0;" for="myFile" class="btn btn-default optFileBtn"><span
+                                    class="glyphicon glyphicon-picture"></span></label>
+                        </span>
+                        <span class="input-group-btn">
+                            <input class="btn btn-default optFileBtn" @click="publish" type="button" value="发布">
+                        </span>
+                    </div>
+                </div>
+                <div class="thumbnail box-img" :class="{hidden: isHidden}" id="thumbnail">
+                    <img :src="imgSrc">
+                </div>
+            </div>
+            <!-- 动态发表结束 -->
+            <!-- 动态展示开始 -->
+            <div class="showDynamic">
+                <div class="panel panel-default marginTop20" v-for="(item, index) in articleList" :key="item._id"
+                    v-cloak>
+                    <div class="panel-heading">{{item.author.nickname}}</div>
+                    <div class="panel-body p_body">
+                        {{item.content}}
+                        <span @click="addSupport(item._id, index)" class="glyphicon glyphicon-thumbs-up p_fabulous"
+                            :class="{'p_fabulous-active': true}">{{item.support.length}}</span>
+                    </div>
+                    <div class="panel-footer box-img" v-if="item.picture">
+                        <img :src="item.picture" alt="">
+                    </div>
+                    <div :class="{'panel-body': item.picture, 'panel-footer': !item.picture}">
+                        <div v-for="value in item.comment" :key="value._id">
+                            <h5><span>{{value.author.nickname}}</span>：</h5>
+                            <span>{{value.content}}</span>
+                        </div>
+                        <div class="input-group marginTop20">
+                            <input v-model="item.commentInput" type="text" class="form-control" placeholder="请输入评论内容">
+                            <span class="input-group-btn">
+                                <button @click="addComment(item._id, index)" class="btn btn-default"
+                                    type="button">发表</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 动态展示结束 -->
+            <button @click="moreArticleBtn" type="button"
+                class="btn btn-default btn-lg btn-block marginBottom50 marginTop20" :class="{disabled: ismoreBtn}"
+                v-cloak>{{moreBtn}}</button>
+        </div>
+        <!-- 主体部分结束 -->
+        <!-- 添加好友弹出框开始 -->
+        <div class="addFriend-box" :class="{hidden: isAddFriend}">
+            <div @click="isAddFriend=true" class="addFriend-box_bg"></div>
+            <div class="modal-content addFriend-box_cont">
+                <div class="modal-header">
+                    <button @click="isAddFriend=true" type="button" class="close"><span>&times;</span></button>
+                    <h4 class="modal-title">添加好友</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1">
+                        <div class="input-group">
+                            <input v-model="lookupInp" type="text" class="form-control" placeholder="账号或手机号">
+                            <span class="input-group-btn">
+                                <button @click="lookupBtn" class="btn btn-default" type="button">搜索</button>
+                            </span>
+                        </div>
+                    </div>
+                    <table class="table table-striped">
+                        <span>{{hint}}</span>
+                        <thead :class="{hidden: isLookupList}">
+                            <tr>
+                                <td>账号</td>
+                                <td>昵称</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody :class="{hidden: isLookupList}">
+                            <tr>
+                                <td>{{lookupList.username}}</td>
+                                <td>{{lookupList.nickname}}</td>
+                                <td><input @click="addFriendBtn" type="submit" class="btn btn-primary" value="添加"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- 添加好友弹出框结束 -->
+    </div>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="./js/vue.js"></script>
+    <script src="./js/index.js"></script>
+</body>
+
+</html>

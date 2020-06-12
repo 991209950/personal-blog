@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用户登录</title>
+    <link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+
+<body>
+    <div class="lay_wrap">
+        <div class="login">
+            <h2>用户登录</h2>
+            <p class="alert alert-danger err hidden" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                <span class="message">手机号不能为空</span>
+            </p>
+            <form id="form">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon" id="sizing-addon1">账号</span>
+                    <input name="username" type="text" class="form-control" placeholder="请输入账号或者手机号" aria-describedby="sizing-addon1">
+                </div>
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon" id="sizing-addon1">密码</span>
+                    <input name="password" type="password" class="form-control" placeholder="请输入密码" aria-describedby="sizing-addon1">
+                </div>
+                <button type="button" class="btn btn-primary btn-lg btn-block">登录</button>
+            </form>
+            <div class="bottom">
+                <a href="./resetpwd.html" target="_blank">忘了密码</a>
+                <span class="dotted">|</span>
+                <a href="./register.html" target="_blank">注册账号</a>
+            </div>
+        </div>
+    </div>
+    <script src="./js/login.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>重置密码</title>
+    <link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./css/resetpwd.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- 页面头部 -->
+        <div class="header">
+            <div class="page-header">
+                <h1>GG安全中心 <small>密码重置</small></h1>
+            </div>
+        </div>
+        <!-- 页面头部结束 -->
+        <!-- 进度条 -->
+        <div class="subnav_process">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
+                    填写账号
+                </div>
+            </div>
+        </div>
+        <!-- 进度条结束 -->
+        <!-- 填写账号 -->
+        <div class="section-main_fillUname input-group-lg">
+            <span> 账号：</span>
+            <br>
+            <input name="username" id="username" type="text" class="form-control" placeholder="账号/手机号" aria-describedby="sizing-addon1">
+            <br>
+            <button id="btn-uname" type="button" class="btn btn-primary">确定</button>
+            <div class="errMessage errTel hidden">手机号不能为空</div>
+        </div>
+        <!-- 填写账号结束 -->
+        <!-- 验证密保问题 -->
+        <div class="section-main_problem input-group-lg hidden">
+            <div class="form-group clearfix">
+                <label class="control-label fl">问题</label>
+                <div class="fl">
+                    <p class="problem">我的注册日期？</p>
+                </div>
+            </div>
+            <div class="form-group clearfix">
+                <label for="answer" class="control-label fl">答案</label>
+                <div class="fl input-group-lg">
+                    <input name="answer" type="text" class="form-control" id="answer" placeholder="请输入问题答案"
+                        aria-describedby="sizing-addon1">
+                </div>
+            </div>
+            <br>
+            <button id="btn-ans" type="button" class="btn btn-primary">验证</button>
+            <div class="errMessage errAnswer hidden">答案不能为空</div>
+        </div>
+        <!-- 验证密保问题结束 -->
+        <!-- 输入新密码 -->
+        <div class="section-main_newPassword hidden">
+            <div class="form-group clearfix">
+                <label for="newPassword" class="control-label fl">新密码</label>
+                <div class="fl input-group-lg">
+                    <input type="text" class="form-control" id="newPassword" placeholder="请输入新密码"
+                        aria-describedby="sizing-addon1">
+                </div>
+            </div>
+            <div class="form-group clearfix">
+                <label for="copyPassword" class="control-label fl">确认密码</label>
+                <div class="fl input-group-lg">
+                    <input type="text" class="form-control" id="copyPassword" placeholder="请输入确认密码"
+                        aria-describedby="sizing-addon1">
+                </div>
+            </div>
+            <button id="btn-newPwd" type="button" class="btn btn-primary">确认修改</button>
+            <div class="errMessage errNewPwd1 hidden">密码不能为空</div>
+            <div class="errMessage errNewPwd2 hidden">确认密码不能为空</div>
+        </div>
+
+        <!-- 输入新密码结束 -->
+        <!-- 完成 -->
+        <div class="section-main_complete hidden">
+            <a href="./login.html" class="btn btn-primary">完成</a>
+            <h4>5秒后自动跳转到登录页面...</h4>
+        </div>
+        <!-- 完成结束 -->
+    </div>
+    <script src="./js/resetpwd.js"></script>
+</body>
+
+</html>
